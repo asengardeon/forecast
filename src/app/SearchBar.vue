@@ -1,15 +1,25 @@
 <template>
-    <dropdown
-        :options="[{ id: 1, name: 'Option 1'}, { id: 2, name: 'Option 2'}]"
-        v-on:selected="validateSelection"
-        :disabled="false"
-        placeholder="Please select an option"
-        class="col-sm-8">
-    </dropdown>
+    <div class="row">
+        <div class="col col-xs-auto">
+            Cidade: 
+        </div>
+        <div class="col col-xs-auto">
+            <dropdown
+                :options="getDropdownValues"
+                v-on:selected="validateSelection"
+                :disabled="false"
+                placeholder="Pesquise uam cidade aqui"                >
+            </dropdown>
+        </div>
+    </div>
 </template>
 
 <script>
 import Dropdown from 'vue-simple-search-dropdown';
+import vue from 'vue';
+import vuex from 'vuex';
+import moduleConsts from "./modules/forecastModuleConsts.es6";
+
 
 export default {
     components:{
@@ -21,14 +31,23 @@ export default {
         }
     },
     methods:{
-        validateSelection: () =>{
-
+        validateSelection: function(id){
+            console.info("selecionou "+id);
         },
-
     },
     computed: {
-        getDropdownValues: () =>{
-
+        ...vuex.mapGetters({
+            cities: [moduleConsts.LOADED_CITIES_GETTER],
+            getMock: [moduleConsts.GET_MOCK_GETTER]
+        }),
+       
+        getDropdownValues: function(){
+            let cits = this.cities;
+            if(cits){
+                return cits.map(data => ({ id: data.city.id, name: data.city.name }));
+            }else{
+                return [].push(getMock);
+            }
         }
     }
 

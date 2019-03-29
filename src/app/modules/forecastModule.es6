@@ -1,16 +1,19 @@
 
 import consts from "./forecastModuleConsts.es6"
 import * as CityService from "../services/city.service.js";
+import mock from "./mockItem.es6"
 
 const state = {
-  activeCity: "Blumenau",
+  activeCity: undefined,
   cities: []
 }
 
 const mutations = {
   [consts.SEARCH_CITY_MUTATION](state, mutationState) {
     state.activeCity = mutationState.city;
-    state.cities.push( mutationState.city);
+    if (!state.cities.find(city => city.id == mutationState.city.id)){
+      state.cities.push( mutationState.city );
+    }
   }
 }
 const actions = {
@@ -24,9 +27,15 @@ const actions = {
   }
 }
 const getters = {
-  [consts.ACTIVE_CITY](state) {
+  [consts.ACTIVE_CITY_GETTER](state) {
+    return  state.activeCity;
+  },
+  [consts.LOADED_CITIES_GETTER](state) {
     return  state.cities;
-  }
+  },
+  [consts.GET_MOCK_GETTER](state) {
+    return mock
+  }  
 }
 
 export default {

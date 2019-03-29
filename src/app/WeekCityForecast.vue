@@ -1,13 +1,46 @@
 <template>
   <div>
-    <h2>dia da semana</h2>
-    <label>Manha Tarde Noite</label>
+    <h2>Ultimos 5 dias</h2>
+    <div class="row">
+      <div class="col col-xs-12" v-for="fore in forecasts">
+        Dia: {{fore.day}}
+        Temperatura: {{fore.temp}} graus
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
+import vue from 'vue';
+import vuex from 'vuex';
+import moduleConsts from "./modules/forecastModuleConsts.es6";
+
 export default {
-    name: "WeekCityForecast"
+    computed: {
+      ...vuex.mapGetters({
+            activeCity: [moduleConsts.ACTIVE_CITY_GETTER],
+            getMock: [moduleConsts.GET_MOCK_GETTER]            
+        }),
+        city: function(){
+          if(!this.activeCity){
+            return this.getMock;
+          }
+          return this.activeCity.city;
+        },
+        forecasts: function(){
+            let cit = this.city;
+            let nexts = this.city;
+            let result = [];
+            for (let index = 0; index < 5; index++) {
+              result.push(nexts.list[index]);              
+            }
+            return result.map(data => {
+              let date = new Date(data.dt *1000);
+              let dt = date.toGMTString();
+              return {day: dt, temp: data.main.temp}
+            });            
+        },
+    }
 };
 </script>
 

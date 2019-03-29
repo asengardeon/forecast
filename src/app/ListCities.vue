@@ -23,7 +23,7 @@ export default {
       activeCity: state => state.ForecastModule.activeCity
     }),
     ...vuex.mapGetters({
-      cities: [moduleConsts.ACTIVE_CITY]
+      cities: [moduleConsts.LOADED_CITIES_GETTER]
     })
   },
   mounted: function () {
