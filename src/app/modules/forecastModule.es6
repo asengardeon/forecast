@@ -49,9 +49,6 @@ const getters = {
   [consts.LOADED_CITIES_GETTER](state) {
     return  state.cities;
   },
-  [consts.GET_MOCK_GETTER](state) {
-    return mock
-  },
   [consts.CITIES_TO_SEARCH_GETTER](state){
     return state.searchCities
   }  

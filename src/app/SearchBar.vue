@@ -39,8 +39,7 @@ export default {
   },
   computed: {
     ...vuex.mapGetters({
-      cities: moduleConsts.CITIES_TO_SEARCH_GETTER,
-      getMock: moduleConsts.GET_MOCK_GETTER
+      cities: moduleConsts.CITIES_TO_SEARCH_GETTER
     }),
 
     getDropdownValues: function() {
