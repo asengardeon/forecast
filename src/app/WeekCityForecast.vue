@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h2>Ultimos 5 dias</h2>
+    <h2>Próximos 5 dias</h2>
     <div class="row">
       <div class="col col-xs-12" v-for="fore in forecasts">
         Dia: {{fore.day}}
@@ -25,7 +25,7 @@ export default {
           if(!this.activeCity){
             return this.getMock;
           }
-          return this.activeCity.city;
+          return this.activeCity;
         },
         forecasts: function(){
             let cit = this.city;

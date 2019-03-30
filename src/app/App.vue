@@ -17,8 +17,7 @@
         <city-forecast></city-forecast>
       </div>
       <div class="row week-city-forecast-row">
-        <week-city-forecast></week-city-forecast>
-        <list-cities></list-cities>
+        <week-city-forecast></week-city-forecast>        
       </div>
     </div>
   </div>
@@ -29,6 +28,8 @@ import SearchBar from "./SearchBar.vue";
 import CityForecast from "./CityForecast.vue";
 import WeekCityForecast from "./WeekCityForecast.vue";
 import ListCities from "./ListCities.vue";
+import moduleConsts from "./modules/forecastModuleConsts.es6";
+import store from './store.es6'
 
 export default {
   name: "App",
@@ -42,6 +43,11 @@ export default {
     return {
       Title: "Clima"
     };
+  },
+  mounted: function () {
+    this.$nextTick(function () {
+      store.dispatch(moduleConsts.INIT_LOAD_CITIES_ACTION);     
+    })
   }
 };
 </script>

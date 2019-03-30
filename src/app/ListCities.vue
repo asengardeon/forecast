@@ -9,7 +9,7 @@
 <script>
 import * as CityService from "./services/city.service.js";
 import ListCityDetail from "./ListCityDetail.vue";
-import vuex from "vuex";
+import vuex,{ mapActions } from "vuex";
 import moduleConsts from "./modules/forecastModuleConsts.es6";
 import store from './store.es6'
 
@@ -26,11 +26,14 @@ export default {
       cities: [moduleConsts.LOADED_CITIES_GETTER]
     })
   },
-  mounted: function () {
-  this.$nextTick(function () {
-      store.dispatch(moduleConsts.SEARCH_CITY_ACTION, this.activeCity);
-  })
-}
+  methods: {
+    findCity: function(){
+      this._findCity(this.activeCity);
+    },
+    ...vuex.mapActions({
+      _findCity: [moduleConsts.SEARCH_CITY_ACTION]
+    })
+  }
 };
 </script>
 

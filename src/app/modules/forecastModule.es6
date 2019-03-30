@@ -5,7 +5,8 @@ import mock from "./mockItem.es6"
 
 const state = {
   activeCity: undefined,
-  cities: []
+  cities: [],
+  searchCities: []
 }
 
 const mutations = {
@@ -14,16 +15,32 @@ const mutations = {
     if (!state.cities.find(city => city.id == mutationState.city.id)){
       state.cities.push( mutationState.city );
     }
+  },
+  [consts.INIT_LOAD_CITIES_MUTATION](state, mutationState){
+    state.searchCities = mutationState.cities 
   }
 }
 const actions = {
-  [consts.SEARCH_CITY_ACTION](store, city) {
-    let vals = CityService.findCities(city);
+  [consts.SEARCH_CITY_ACTION](store, {city, byId}) {
+    let vals;
+    if (byId){
+      vals = CityService.findCitiesById(city.id);
+    }else{
+      vals = CityService.findCities(city.name);
+    }
     vals.then(
       function result(response) {
         store.commit(consts.SEARCH_CITY_MUTATION, {city: response.data});
       }
     );
+  },
+  [consts.INIT_LOAD_CITIES_ACTION](store){
+    let vals = CityService.loadRecordedCities();
+    vals.then(
+      function result(response){
+        store.commit(consts.INIT_LOAD_CITIES_MUTATION, response.data)
+      }
+    )
   }
 }
 const getters = {
@@ -35,6 +52,9 @@ const getters = {
   },
   [consts.GET_MOCK_GETTER](state) {
     return mock
+  },
+  [consts.CITIES_TO_SEARCH_GETTER](state){
+    return state.searchCities
   }  
 }
 

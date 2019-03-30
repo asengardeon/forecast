@@ -40,7 +40,7 @@ export default {
              if(!this.activeCity){
                 return this.getMock;
             }
-            return this.activeCity.city;
+            return this.activeCity;
         },
         getName: function(){
             if(!this.city){
