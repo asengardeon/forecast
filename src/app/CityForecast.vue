@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div v-if="activeCity">
         <div class="row">
             <div class="col">
             <h2>{{getName}}</h2>
@@ -33,13 +33,9 @@ export default {
     name: 'CityForecast',
     computed: {
         ...vuex.mapGetters({
-            activeCity: [moduleConsts.ACTIVE_CITY_GETTER],
-            getMock: [moduleConsts.GET_MOCK_GETTER]               
+            activeCity: [moduleConsts.ACTIVE_CITY_GETTER]
         }),
         city: function(){
-             if(!this.activeCity){
-                return this.getMock;
-            }
             return this.activeCity;
         },
         getName: function(){

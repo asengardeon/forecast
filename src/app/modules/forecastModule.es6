@@ -1,7 +1,6 @@
 
 import consts from "./forecastModuleConsts.es6"
 import * as CityService from "../services/city.service.js";
-import mock from "./mockItem.es6"
 
 const state = {
   activeCity: undefined,

@@ -1,6 +1,6 @@
 <template>
-  <div>
-    <h2>Próximos 5 dias</h2>
+  <div v-if="activeCity">
+    <h2>Próximas 5 medições</h2>
     <div class="row">
       <div class="col col-xs-12" v-for="fore in forecasts">
         Dia: {{fore.day}}
@@ -18,13 +18,9 @@ import moduleConsts from "./modules/forecastModuleConsts.es6";
 export default {
     computed: {
       ...vuex.mapGetters({
-            activeCity: [moduleConsts.ACTIVE_CITY_GETTER],
-            getMock: [moduleConsts.GET_MOCK_GETTER]            
+            activeCity: [moduleConsts.ACTIVE_CITY_GETTER]       
         }),
         city: function(){
-          if(!this.activeCity){
-            return this.getMock;
-          }
           return this.activeCity;
         },
         forecasts: function(){
