@@ -18,6 +18,16 @@ const findCitiesById = id => {
   });
 };
 
+const findCitiesByCoord = coords => {
+  const lat = coords.latitude;
+  const lon = coords.longitude;
+  return axios({
+    method: 'get',
+    url: `http://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${APPI_KEY}&units=metric`,
+    responseType: 'json'
+  });
+};
+
 const loadRecordedCities = () => {
   return axios({
     method: 'get',
@@ -39,5 +49,6 @@ export {
   findCities,
   loadRecordedCities,
   findCitiesById,
-  insertCity
+  insertCity,
+  findCitiesByCoord
 };

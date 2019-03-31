@@ -3,6 +3,7 @@ import * as CityService from "../services/city.service.js";
 
 const state = {
   activeCity: undefined,
+  cityByLocation: undefined,
   cities: [],
   searchCities: []
 }
@@ -16,7 +17,10 @@ const mutations = {
   },
   [consts.INIT_LOAD_CITIES_MUTATION](state, mutationState) {
     state.searchCities = mutationState.cities
-  }
+  },
+  [consts.CITY_BY_LOCATION_MUTATION](state, mutationState) {
+    state.cityByLocation = mutationState.city
+  }  
 }
 const actions = {
   [consts.SEARCH_CITY_ACTION](store, {
@@ -38,6 +42,7 @@ const actions = {
       }
     );
   },
+
   [consts.INIT_LOAD_CITIES_ACTION](store) {
     let vals = CityService.loadRecordedCities();
     vals.then(
@@ -60,11 +65,31 @@ const actions = {
         });       
       }
     );    
+  },
+  [consts.CITY_BY_LOCATION_ACTION](store){
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(position => {
+        let vals = CityService.findCitiesByCoord(position.coords);
+        vals.then(
+          function result(responseFind) {
+            let city = responseFind.data;
+            store.commit(consts.CITY_BY_LOCATION_MUTATION, {
+              city
+            });
+            if(!store.state.activeCity){
+              store.commit(consts.SEARCH_CITY_MUTATION, {
+                city
+              });
+            }
+          })
+      });
+    }
   }
 }
+
 const getters = {
   [consts.ACTIVE_CITY_GETTER](state) {
-    return state.activeCity;
+    return state.activeCity;    
   },
   [consts.LOADED_CITIES_GETTER](state) {
     return state.cities;
