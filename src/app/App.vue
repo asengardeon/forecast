@@ -29,6 +29,12 @@ import CityForecast from "./CityForecast.vue";
 import WeekCityForecast from "./WeekCityForecast.vue";
 import moduleConsts from "./modules/forecastModuleConsts.es6";
 import store from './store.es6'
+import Vue from 'vue'
+import Buefy from 'buefy'
+import 'buefy/dist/buefy.css'
+
+Vue.use(Buefy)
+
 
 export default {
   name: "App",

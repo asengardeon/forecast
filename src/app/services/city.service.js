@@ -26,9 +26,18 @@ const loadRecordedCities = () => {
   });
 };
 
+const insertCity = city => {
+  const id = city.city.id;
+  const name = city.city.name;
+  const form = new FormData();
+  form.append('id', id);
+  form.append('name', name);
+  return axios.post('http://127.0.0.1:5002/cities', form);
+};
+
 export {
   findCities,
   loadRecordedCities,
-  findCitiesById
+  findCitiesById,
+  insertCity
 };
-

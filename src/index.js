@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import App from './app/App.vue';
 import RegisterCity from './app/RegisterCity.vue';
+import Test from './app/test.vue';
 
 import './index.css';
 import VueRouter from 'vue-router';
@@ -21,6 +22,12 @@ const router = new VueRouter({
       path: '/register',
       components: {
         default: RegisterCity
+      }
+    },
+    {
+      path: '/test',
+      components: {
+        default: Test
       }
     }
   ]

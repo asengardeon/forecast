@@ -1,17 +1,5 @@
 <template>
-    <div>
-        <div class=row>
-            <div class="col-xs-4">
-                <label> Identificador: </label>
-            </div>
-            <div class="col-xs-4">
-                <label> Nome: </label>
-            </div>
-            <div class="col-xs-4">
-                <div> Excluir</div>
-            </div>        
-        </div>
-    </div>    
+     
 </template>
 
 <script>
