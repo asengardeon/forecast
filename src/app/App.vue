@@ -7,7 +7,7 @@
           <h1 class="title">{{ Title }}</h1>
         </div>
         <div class="col col-sm">
-          <label class="col col-xs input-cidade">Cadastrar Cidade</label>
+          <label class="col col-xs input-cidade"> <router-link :to="{ path: 'register' }">Cadastrar Cidade</router-link> </label>
         </div>
       </div>
       <div class="row search-bar-row">
@@ -27,7 +27,6 @@
 import SearchBar from "./SearchBar.vue";
 import CityForecast from "./CityForecast.vue";
 import WeekCityForecast from "./WeekCityForecast.vue";
-import ListCities from "./ListCities.vue";
 import moduleConsts from "./modules/forecastModuleConsts.es6";
 import store from './store.es6'
 
@@ -36,8 +35,7 @@ export default {
   components: {
     SearchBar,
     CityForecast,
-    WeekCityForecast,
-    ListCities
+    WeekCityForecast
   },
   data() {
     return {

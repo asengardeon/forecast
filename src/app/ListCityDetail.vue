@@ -1,24 +1,33 @@
 <template>
     <div>
-        <label> Nome: {{getName}}</label>
-        <label> País: {{getCountry}}</label>
-        <label> População: {{getPopulation}}</label>        
+        <div class=row>
+            <div class="col-xs-4">
+                <label> Identificador: </label>
+            </div>
+            <div class="col-xs-4">
+                <label> Nome: </label>
+            </div>
+            <div class="col-xs-4">
+                <div> Excluir</div>
+            </div>        
+        </div>
     </div>    
 </template>
 
 <script>
 export default {
  name: "ListCityDetail",
- props:['city'],
+ props:{city:{
+                type: String,
+                required: false  
+            }
+ },
  computed: {
      getName: function(){
-         return this.city.city.name;
+         return this.city ? this.city.name : "";
      },
-     getCountry: function(){
-         return this.city.city.country;
-     },
-     getPopulation: function(){
-         return this.city.city.population
+     getId: function(){
+         return this.city ? this.city.id : "";
      }
  }
 }

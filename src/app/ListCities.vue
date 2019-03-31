@@ -1,9 +1,11 @@
 <template>
-  <ul>
-    <li v-for="city in cities" :key="city.id">
-      <list-city-detail :city="city"></list-city-detail>>
-    </li>
-  </ul>
+ <div>
+   <list-city-detail :city="seekedCity"></list-city-detail>
+
+   <h2> cidades cadastradas</h2>
+
+   
+</div>
 </template>
 
 <script>
@@ -14,7 +16,13 @@ import moduleConsts from "./modules/forecastModuleConsts.es6";
 import store from './store.es6'
 
 export default {
+
   name: "ListCities",
+  props: {seekedCity:{
+          type: Object,
+          required: false
+          }
+  },
   components: {
     ListCityDetail
   },
@@ -23,8 +31,11 @@ export default {
       activeCity: state => state.ForecastModule.activeCity
     }),
     ...vuex.mapGetters({
-      cities: [moduleConsts.LOADED_CITIES_GETTER]
-    })
+      _cities: [moduleConsts.CITIES_TO_SEARCH_GETTER]
+    }),
+    cities: function(){
+      return this._cities;
+    }
   },
   methods: {
     findCity: function(){
@@ -32,7 +43,10 @@ export default {
     },
     ...vuex.mapActions({
       _findCity: [moduleConsts.SEARCH_CITY_ACTION]
-    })
+    }),
+    onChange: function(){
+      // do nothing
+    }
   }
 };
 </script>
