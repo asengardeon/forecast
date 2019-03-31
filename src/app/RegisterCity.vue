@@ -76,7 +76,7 @@ export default {
       this.$dialog.prompt({
         message: `Cidade`,
         inputAttrs: {
-          placeholder: "e.g. Londres",
+          placeholder: "ex: Londres",
           maxlength: 60,
           value: this.name
         },

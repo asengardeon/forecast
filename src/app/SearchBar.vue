@@ -1,6 +1,5 @@
 <template>
   <div class="row">
-    <div class="col col-xs-auto">Cidade:</div>
     <div class="col col-xs-auto">
       <dropdown
         :options="getDropdownValues"
@@ -8,6 +7,7 @@
         :disabled="false"
         placeholder="Pesquise uam cidade aqui"
       ></dropdown>
+      <small>Caso a cidade não esteja na listagem, é necessário cadastrar  como disponível</small>
     </div>
   </div>
 </template>

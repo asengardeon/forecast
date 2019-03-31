@@ -42,10 +42,7 @@ export default {
       } 
     },
     getName: function() {
-      if (!this.city) {
-        return "";
-      }
-      return this.city.name;
+       return this.activeCity.city.name;
     },
     getUmidity: function() {
       if (!this.lastForecast) {
