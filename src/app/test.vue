@@ -1,67 +1,22 @@
 <template>
     <section>
-        <p class="content"><b>Selected:</b> {{ selected }}</p>
-        <b-field label="Find or add a Fruit">
-            <b-autocomplete
-                v-model="name"
-                ref="autocomplete"
-                :data="filteredDataArray"
-                placeholder="e.g. Dog"
-                @select="option => selected = option">
-                <template slot="header">
-                    <a @click="showAddFruit">
-                        <span> Add new... </span>
-                    </a> 
-                </template>
-                <template slot="empty">No results for {{name}}</template>
-            </b-autocomplete>
-        </b-field>
+        <b-tabs position="is-centered" class="block">
+            <!-- <b-tab-item v-for="(day, index) in items" label="da">
+                </b-tab-item>             -->
+        </b-tabs>
     </section>
 </template>
 
 <script>
-    export default {
-        data() {
-            return {
-                data: [
-                    'Orange',
-                    'Apple',
-                    'Banana',
-                    'Pear',
-                    'Lemon',
-                    'Strawberry',
-                    'Kiwi'
-                ],
-                name: '',
-                selected: null
-            }
-        },
-        computed: {
-            filteredDataArray() {
-                return this.data.filter((option) => {
-                    return option
-                        .toString()
-                        .toLowerCase()
-                        .indexOf(this.name.toLowerCase()) >= 0
-                })
-            }
-        },
-        methods: {
-            showAddFruit() {
-                this.$dialog.prompt({
-                    message: `Fruit`,
-                    inputAttrs: {
-                        placeholder: 'e.g. Watermelon',
-                        maxlength: 20,
-                        value: this.name
-                    },
-                    confirmText: 'Add',
-                    onConfirm: (value) => {
-                        this.data.push(value)
-                        this.$refs.autocomplete.setSelected(value)
-                    }
-                })
-            }
+export default {
+    computed: {
+        days: function(){
+            
         }
     }
+}
 </script>
+
+<style>
+
+</style>
