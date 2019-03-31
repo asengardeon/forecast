@@ -11,7 +11,9 @@
 export default {
     computed: {
         days: function(){
-            
+            Object.keys(byDay).map( (day, index) => (
+              console.log(day, index, byDay[day])
+            ));
         }
     }
 }

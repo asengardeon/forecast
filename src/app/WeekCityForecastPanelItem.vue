@@ -13,16 +13,16 @@ export default {
   props: ["item"],
   computed: {
     time: function() {
-      return this.item.data.dt_txt;
+      return this.item.dt_txt;
     },
     temp: function() {
-      return this.item.data.main.temp;
+      return this.item.main.temp;
     },
     windSpeed: function() {
-        return this.item.data.wind.speed;
+        return this.item.wind.speed;
     },
     icon: function() {
-      let img = this.item.data.weather[0].icon;
+      let img = this.item.weather[0].icon;
       return `http://openweathermap.org/img/w/${img}.png`;
     }
   }

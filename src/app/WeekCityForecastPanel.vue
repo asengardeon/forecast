@@ -2,7 +2,14 @@
   <section>
     <b-tabs position="is-centered" class="block">
       <b-tab-item v-for="item in getByDay" :key="item.date" :label="item.date">
-          <week-city-forecast-panel-item :item="item"></week-city-forecast-panel-item>
+        <div class="row weatherRow">
+          <time class="timestamp col-3">Data e hora</time>
+          <div class="icon col-3"></div>
+          <div class="temp col-4">Temperatura em graus</div>
+        </div>
+        <div v-for="detail in item.data" :key="detail.dt">
+          <week-city-forecast-panel-item :item="detail"></week-city-forecast-panel-item>
+        </div>
       </b-tab-item>
     </b-tabs>
   </section>
@@ -11,7 +18,6 @@
 <script>
 import moment from "moment";
 import WeekCityForecastPanelItem from "./WeekCityForecastPanelItem.vue";
-
 
 function groupWeatherByDay(list) {
   const days = new Map(); // use Map as need we to maintain insertion order
@@ -27,17 +33,17 @@ function groupWeatherByDay(list) {
 
 export default {
   props: ["city"],
-  components:{WeekCityForecastPanelItem},
+  components: { WeekCityForecastPanelItem },
   computed: {
     getByDay: function() {
       let byDay = groupWeatherByDay(this.city.list);
       let days = [];
       Object.keys(byDay).map((day, index) =>
         //   console.log(day, index, byDay[day]);
-        days.push({ date: day, data: byDay[day][0] })
+        days.push({ date: day, data: byDay[day] })
       );
       return days;
-    }    
+    }
   }
 };
 </script>
